@@ -201,7 +201,18 @@ a:active, a:focus {
     background-color: #9ed034;
     font-size: 22px;
     font-weight: 600;
-    height: 50px;
+    height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.list-item .list-content a.price-btn {
+    background-color: #9ed034;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 1px;
+    padding: 12px;
     text-align: center;
     text-transform: uppercase;
 }

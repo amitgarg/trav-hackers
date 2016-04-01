@@ -1,4 +1,4 @@
-{
+var europ_packages_info = {
     "packages": [
         {
             "id": "pack_1",

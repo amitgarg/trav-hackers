@@ -17,26 +17,32 @@
 			<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBvAtw_wYNKCFWJPSUlhGqUITLVjS1DNcA"></script>
 			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 			<script type="text/javascript" src="libs/app/map-handler.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+			
+			<script type="text/javascript" src="libs/app/constants.js"></script>
 			<script type="text/javascript" src="libs/app/chart-handler.js"></script>
 			<script type="text/javascript" src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 			<script type="text/javascript" src="libs/vendor/jQDateRangeSlider-withRuler-min.js"></script>
+			<script type="text/javascript" src="libs/vendor/json2.js"></script>
+			<script type="text/javascript" src="libs/vendor/jquery.mockjax.js"></script>
+			<script type="text/javascript" src="libs/app/mock-ajax.js"></script>
 			<script type="text/javascript" src="libs/vendor/jquery.mousewheel.min.js"></script>
 			<script type="text/javascript" src="libs/vendor/moment.js"></script>
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
 			
 			<script id="entry-template" type="text/x-handlebars-template">
 			  	<div class="owl-item" style="width: 293px;">
 			  		<div class="list-item">
 	                	<div class="list-thumb">
 	                    	<div class="title">
-	                        	<h4>Weekend {{Weekend_num}}:{{name}}</h4>
+	                        	Weekend {{Weekend_num}}:{{name}}
 		                    </div>
-		                    <img alt="destination 3" src="images/destination_3.jpg">
+		                    <img alt="destination 3" src="assets/{{image}}" height="180px" width="293px">
 		                </div> <!-- /.list-thumb -->
-		                <div class="list-content">
-		                    <h5>Flight: {{flight_best.type}}, Hotel: {{hotel_best.type}}</h5>
-		                    <span>LUXE HOTEL, 5 NIGHTS, 6 STARS</span>
-		                    <a class="price-btn" href="#">$3,100 Book Now</a>
+		                <div class="list-content" style="margin-top:-40px">
+		                    <h1 style="color:white;">Flight: {{flightClass flight_best}}, Hotel: {{hotelClass hotel_best}}</h1>
+		                    <h1>Inclusions:</h1>
+		                    {{inclusions events}}		                    
+		                    <a class="price-btn" href="#">{{currencyDisplay this}}</a>
 		                </div> <!-- /.list-content -->
 	            	</div>
 	        	</div>

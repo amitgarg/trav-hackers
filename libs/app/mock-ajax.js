@@ -1,5 +1,5 @@
 $.mockjax({
-	url : '/regioncollection',
+	url : '/europe_best_packages',
 	responseText : {
 		"DistributionList" : [{
 			"Distribution" : [{

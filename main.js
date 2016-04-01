@@ -22,7 +22,7 @@ google.load('visualization', '1', {
             "destination_name": "Paris",
             "destination_code": "PAR",
             "type": "F",
-            "image": "images/par_1.png",
+            "image": "images/par_1.jpg",
             "flight_best": {"type":"E", "price":8000},
             "hotel_best": {"type":"B", "price":5000},
             "events": [{"type":"Eiffel Tower Pass", "price":2800}, {"type":"Access Louvre", "price":1400}, {"type":"Metro Pass", "price":1200}],
