@@ -1,0 +1,10 @@
+{
+    "bookingData": [
+        {
+            "passengerDetails":[{"firstName": "Gurjyot", "lastName":"Singh", "dob":[{"month":"March", "day":10, "Year":1986}], "userid":1675487650}],
+            "tripSummary":[{"origin":"Bangalore (BLR)", "destination":"Nice (NCE)", "totalPrice":60292,"currency":"INR", "departureDetails":[{"flightNum":"AF191", "date":"01Jul2016", "time":"0140"}],"arrivalDetails":[{"flightNum":"AF192", "date":"05Aug2016", "time":"2345"}] }]
+        }
+        
+     ]
+     
+}
