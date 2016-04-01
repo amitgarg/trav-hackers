@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="UTF-8">
+		<title>Trav Hackers</title>
+	</head>
+
+	<body>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/custom.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/iThing.css" media="screen">
+
+		<div style="height:500px;">
+			<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+			<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBvAtw_wYNKCFWJPSUlhGqUITLVjS1DNcA"></script>
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+			<script type="text/javascript" src="libs/app/map-handler.js"></script>
+			<script type="text/javascript" src="libs/app/chart-handler.js"></script>
+			<script type="text/javascript" src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+			<script type="text/javascript" src="libs/vendor/jQDateRangeSlider-withRuler-min.js"></script>
+			<script type="text/javascript" src="libs/vendor/jquery.mousewheel.min.js"></script>
+			<script type="text/javascript" src="libs/vendor/moment.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+			
+			<script id="entry-template" type="text/x-handlebars-template">
+			  	<div class="owl-item" style="width: 293px;">
+			  		<div class="list-item">
+	                	<div class="list-thumb">
+	                    	<div class="title">
+	                        	<h4>Weekend {{Weekend_num}}:{{name}}</h4>
+		                    </div>
+		                    <img alt="destination 3" src="images/destination_3.jpg">
+		                </div> <!-- /.list-thumb -->
+		                <div class="list-content">
+		                    <h5>Flight: {{flight_best.type}}, Hotel: {{hotel_best.type}}</h5>
+		                    <span>LUXE HOTEL, 5 NIGHTS, 6 STARS</span>
+		                    <a class="price-btn" href="#">$3,100 Book Now</a>
+		                </div> <!-- /.list-content -->
+	            	</div>
+	        	</div>
+			</script>
+			<script type="text/javascript" src="libs/app/info-handler.js"></script>
+			<script type="text/javascript" src="main.js"></script>
+			
+			<div id="map_canvas"></div>
+			<!-- <div id="container"></div> -->
+		</div>
+		
+		
+	</body>
+
+</html>
