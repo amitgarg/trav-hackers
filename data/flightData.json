@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        {
+            "origin":"Bangalore",
+            "originCode":"BLR",
+            "destination":"Nice",
+            "destinationCode":"NCE",
+            "departureDate":"01JUL16",
+            "ReturnDate":"05AUG16",
+            "outboundFlights":[{"airlineName": "Air France", "flightCode":"AF191","departureTime":"0140", "arrivalTime":1355, "duration":"15h 45min", "noOfSeatsLeft":3, "price": 33217},{"airlineName": "Turkish Airlines", "flightCode":"TK8479","departureTime":2120, "arrivalTime":1735, "duration":"23h 25min", "noOfSeatsLeft":2, "price":36000},{"airlineName": "Emirates", "flightCode":"EK569","departureTime":"0430", "arrivalTime":1340, "duration":"12h 40min", "noOfSeatsLeft":3, "Price": 42000}, {"airlineName": "British Airways", "flightCode":"BA118","departureTime":"0700", "arrivalTime":1845, "duration":"15h 15min", "noOfSeatsLeft":1, "Price":40000} ],
+            "inboundFlights":[{"airlineName": "Air France", "flightCode":"AF192","departureTime":"0700", "arrivalTime":2345, "duration":"13h 55min", "noOfSeatsLeft":3, "price": 27165},{"airlineName": "Turkish Airlines", "flightCode":"TK8492","departureTime":1130, "arrivalTime":1100, "duration":"20h 20min", "noOfSeatsLeft":2, "price":25515},{"airlineName": "Emirates", "flightCode":"EK564","departureTime":1535, "arrivalTime":"0905", "duration":"14h 10min", "noOfSeatsLeft":3, "Price": 28000}, {"airlineName": "British Airways", "flightCode":"BA119","departureTime":1155, "arrivalTime":"0440", "duration":"13h 15min", "noOfSeatsLeft":1, "Price":43756} ]
+        }
+        
+     ]
+     
+}
