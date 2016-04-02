@@ -1,9 +1,29 @@
+var users_map = {};
 $.mockjax({
-	url : '/packages?dest=NCE&type=F&week_start=1&week_end=4&category=overall_cheapest',
+	url : '/session',
+	type: 'POST',
 	response: function(settings) {
 	    // Investigate the `settings` to determine the response...
+	    var data = settings.data;
+	    var unique_id = data.user.org_id+'_'+data.user.emp_id;
+	    var user_info = users_map[unique_id];
+	    if(!user_info){
+	    	data.user.session_id = unique_id;
+	    	users_map[unique_id] = data.user;
+	    	user_info = data.user;
+	    }
+	    this.responseText = {session_id: user_info.session_id};
+	  }
+	
+});
+$.mockjax({
+	// url : '/packages?dest=NCE&type=F&week_start=1&week_end=4&category=overall_cheapest',
+	url : '/packages\?dest=NCE&week_start=1&week_end=4&category=overall_cheapest&session_id=1A_700798',
+	response: function(settings) {
+	    // Investigate the `settings` to determine the response...
+	    var user = users_map["1A_700798"];
 	    var f_packages = europ_packages_info.packages.filter(function(package){
-	    	return package.type==="F";
+	    	return package.type===user.emp_type;
 	    });
 	    var best_packages = [1,2,3,4].map(function(week){
 	    	week_packages = f_packages.filter(function(package){

@@ -5,26 +5,50 @@ google.load('visualization', '1', {
 		// // new SearchAnalysisRouter();
 		// new PatternAnalysisRouter();
 		// Backbone.history.start();
+		
 		var options = {
 			container : $('#map_canvas'),
-			centerLattitude : 45,
-			centerLongitude : 15,
-			zoom : 2,
+			centerLattitude : 43.66532403,
+			centerLongitude : 7.219268219,
+			zoom : 4,
 		};
 
+		drawMap(options);
+		var center = new google.maps.LatLng(43.66532403, 7.219268219); 
+		var marker = new google.maps.Marker({
+		    position: center,
+		    map: map,
+		    animation: google.maps.Animation.BOUNCE,
+		    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+		    title: "Nice"
+		  });
+		  
 		$.ajax({
-			url: '/packages?dest=NCE&type=F&week_start=1&week_end=4&category=overall_cheapest',
+			url : '/session',
+			type : 'POST',
+			data: {user: {emp_id: '700798', org_id: '1A', name: "Amit Kumar Garg", emp_type: "F"}},
 			success:function(response){
-				response.forEach(function(place){
-					markPackage(place);
+				session_id = response.session_id;
+				console.log(session_id);
+				$.ajax({
+					url: '/packages?dest=NCE&week_start=1&week_end=4&category=overall_cheapest&session_id='+session_id,
+					success:function(response){
+							markPackages(response,center);
+					},
+					error:function(error){
+
+					}
 				});
 			},
 			error:function(error){
 
 			}
-		})
+		});
 
-		drawMap(options);
+
+		
+
+		
 
 		// markPackage({
   //           "id": "pack_1",

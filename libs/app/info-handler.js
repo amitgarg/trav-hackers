@@ -1,7 +1,14 @@
 var source   = $("#entry-template").html();
 var template = Handlebars.compile(source);
 
-function markPackage(package){
+function markPackages(packages,center){
+  var status = {};
+  packages.forEach(function(place){
+    markPackage(place,center,status);
+  });
+}
+
+function markPackage(package,center,status){
   var contentString = template(package);
 
   var infowindow = new google.maps.InfoWindow({
@@ -14,9 +21,21 @@ function markPackage(package){
     map: map,
     title: package.name
   });
-  marker.addListener('click', function() {
+  marker.addListener('mouseover', function() {
+    if(status.current_info){
+      status.current_info.close();
+    }
     infowindow.open(map, marker);
+    status.current_info = infowindow;
   });
+  // marker.addListener('mouseout', function() {
+  //   infowindow.close(map, marker);
+  //   map.setCenter(center);
+  // });
+  google.maps.event.addListener(infowindow, 'closeclick', function(){
+    map.setCenter(center);   
+    status.current_info = null; 
+  }); 
 }
 
   
