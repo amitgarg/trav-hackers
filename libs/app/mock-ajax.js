@@ -1,5 +1,11 @@
 var users_map = {};
 var itinerary_map = {};
+function store_item(type,id,value){
+	localStorage.setItem(type + '_' + id,JSON.stringify(value));
+}
+function get_item(type,id){
+	return JSON.parse(localStorage.getItem(type + '_' + id));
+}
 $.mockjax({
 	url : '/session',
 	type: 'POST',
@@ -7,10 +13,12 @@ $.mockjax({
 	    // Investigate the `settings` to determine the response...
 	    var data = settings.data;
 	    var unique_id = data.user.org_id+'_'+data.user.emp_id;
-	    var user_info = users_map[unique_id];
+	    var user_info = get_item('user',unique_id);
+	    // var user_info = users_map[unique_id];
 	    if(!user_info){
 	    	data.user.session_id = unique_id;
-	    	users_map[unique_id] = data.user;
+	    	store_item('user',unique_id,data.user);
+	    	// users_map[unique_id] = data.user;
 	    	user_info = data.user;
 	    }
 	    this.responseText = {session_id: user_info.session_id};
@@ -24,11 +32,30 @@ $.mockjax({
 	type: 'POST',
 	response: function(settings) {
 	    var data = settings.data;
-	    if(!itinerary_map[settings.urlParams.session_id]){
-	    	itinerary_map[settings.urlParams.session_id] = settings.data;
+	    var itinerary = get_item('itinerary',settings.urlParams.session_id);
+	    if(!itinerary){
+	    	store_item('itinerary',settings.urlParams.session_id,settings.data);
+	    	// itinerary_map[settings.urlParams.session_id] = settings.data;
 	    }
-	    console.log(itinerary_map);
+	    // if(!itinerary_map[settings.urlParams.session_id]){
+	    // 	itinerary_map[settings.urlParams.session_id] = settings.data;
+	    // }
 	    this.responseText = {'status' : 'success'};
+	  }
+	
+});
+
+$.mockjax({
+	url : /^\/itinerary\/([\w]+)$/,
+	urlParams : ["session_id"],
+	type: 'GET',
+	response: function(settings) {
+	    var itinerary = get_item('itinerary',settings.urlParams.session_id);
+	    
+	    // if(!itinerary_map[settings.urlParams.session_id]){
+	    // 	itinerary_map[settings.urlParams.session_id] = settings.data;
+	    // }
+	    this.responseText = itinerary;
 	  }
 	
 });
@@ -38,8 +65,10 @@ $.mockjax({
 	url : '/packages?category=overall_cheapest&session_id=1A_700798',
 	response: function(settings) {
 	    // Investigate the `settings` to determine the response...
-	    var user = users_map["1A_700798"];
-	    var itinerary = itinerary_map["1A_700798"].itinerary;
+	    var user = get_item('user',"1A_700798");
+	    // var user = users_map["1A_700798"];
+	    var it_info = get_item('itinerary',"1A_700798");
+	    var itinerary = it_info.itinerary;
 	    var f_packages = europ_packages_info.packages.filter(function(package){
 	    	return package.type===user.emp_type;
 	    });

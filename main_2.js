@@ -22,37 +22,41 @@ google.load('visualization', '1', {
 		    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
 		    title: "Nice"
 		  });
-		  
-		$.ajax({
-			url : '/session',
-			type : 'POST',
-			data: {user: {emp_id: '700798', org_id: '1A', name: "Amit Kumar Garg", emp_type: "F"}},
+
+		function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+		    function(m,key,value) {
+		      vars[key] = value;
+		    });
+		    return vars;
+		  };
+		  var session_id = getUrlVars()["session_id"];
+
+		  var source2 = $("#entry-template2").html();
+		  var template2 = Handlebars.compile(source2);
+
+		  $.ajax({
+			url : '/itinerary/'+session_id,
+			type : 'GET',
 			success:function(response){
-				session_id = response.session_id;
-				console.log(session_id);
 				$.ajax({
-					url : '/itinerary/'+session_id,
-					type : 'POST',
-					data: {itinerary: {week_start: 1, week_end: 4, dest: "NCE"}},
-					success:function(){
-						$.ajax({
-							url: '/packages?category=overall_cheapest&session_id='+session_id,
-							success:function(response){
-								markPackages(response,center,session_id);
-							},
-							error:function(error){
+					url: '/packages?category=overall_cheapest&session_id='+session_id,
+					success:function(response){
+						console.log(response);
+							markPackages(response,center);
+							response.forEach(function(package){
+								$('.pkg-list').append(template2(package));
+							});
+							
+					},
+					error:function(error){
 
-							}
-						});
 					}
-				
 				});
-			},
-			error:function(error){
-
 			}
+		
 		});
-
 		
 		(function($) {
 			$.fn.drags = function(opt) {

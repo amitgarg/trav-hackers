@@ -36,7 +36,7 @@
 			}
 			#pattern-analysis-list {
 				/*width: 220px;*/
-				width: 220px;
+				width: 320px;
 				height: 500px;
 				border-color: #E5E5E5;
 				border-image: none;
@@ -129,8 +129,9 @@
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBvAtw_wYNKCFWJPSUlhGqUITLVjS1DNcA"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script type="text/javascript" src="libs/app/map-handler.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+		<script type="text/javascript" src="libs/app/map-handler.js"></script>
+		
 		
 		<script type="text/javascript" src="libs/app/constants.js"></script>
 		<script type="text/javascript" src="libs/app/chart-handler.js"></script>
@@ -161,8 +162,26 @@
             	</div>
         	</div>
 		</script>
+		<script id="entry-template2" type="text/x-handlebars-template">
+		  	<div class="owl-item" style="width: 293px;margin-bottom:70px;">
+		  		<div class="list-item">
+                	<div class="list-thumb">
+                    	<div class="title">
+                        	Weekend {{Weekend_num}}:{{name}}
+	                    </div>
+	                    <img alt="destination 3" src="assets/{{image}}" height="180px" width="293px">
+	                </div> <!-- /.list-thumb -->
+	                <div class="list-content" style="margin-top:0px">
+	                    <h1>Flight: {{flightClass flight_best}}, Hotel: {{hotelClass hotel_best}}</h1>
+	                    <h1>Inclusions:</h1>
+	                    {{inclusions events}}		                    
+	                    <a class="price-btn" href="#">{{currencyDisplay this}}</a>
+	                </div> <!-- /.list-content -->
+            	</div>
+        	</div>
+		</script>
 		<script type="text/javascript" src="libs/app/info-handler.js"></script>
-		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="main_2.js"></script>
 
 		<div class="header">
 			<span><img src="assets/images/yatra-logo.jpg" class="logo"></span>
@@ -174,28 +193,13 @@
 			<div id="fixed-div">
 				<div id="pattern-analysis-list">
 					<div class="header">
-						<span>Pattern Analysis</span>
+						<span>Weekend Selections</span>
 					</div>
-					<h1>Market:</h1>
-					<span id="marketSelected"></span>
-					<div ondragstart="onDrag(event)">
-						<a draggable="true" data-value="report-search-by-search-date"> Searches by Search date </a>
-						<a draggable="true" data-value="report-search-by-travel-date"> Searches by Travel date </a>
-						<a draggable="true" data-value="report-search-by-search-day"> Searches by Search day </a>
-						<a draggable="true" data-value="report-search-by-travel-day"> Searches by Travel day </a>
-					</div>
-					<input type="submit" value="Add Report View" class="primarybutton" onclick="addDiv()">
+					<div class="pkg-list" style="height:96%;overflow-y: scroll;"></div>
 				</div>
 			</div>
 		</div>
-		<!--div style="height:500px;">
-			
-			
-			<div id="map_canvas"></div>
-			<! <div id="container"></div> >
-		</div-->
-		
-		
+	
 	</body>
 
 </html>

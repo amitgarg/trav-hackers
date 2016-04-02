@@ -6,7 +6,7 @@ html {
   	margin: 0;
 }
 body {
-	width: 1360px;
+	width: 1450px;
 	font-size: 11px;
   	background-color: #ffffff;
     padding: 0;
@@ -44,6 +44,7 @@ Header
 	height: 35px;
 	vertical-align: middle;
 	font-size: 14px;
+  font-weight : bold;
 }
 /* ---------------------------
 Buttons bar
