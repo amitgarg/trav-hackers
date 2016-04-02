@@ -1,33 +1,43 @@
 $.mockjax({
-	url : '/europe_best_packages',
-	responseText : {
-		"DistributionList" : [{
-			"Distribution" : [{
-				"GDS" : "1A",
-				"Count" : "4998"
-			}, {
-				"GDS" : "1P",
-				"Count" : "100"
-			}, {
-				"GDS" : "1S",
-				"Count" : "300"
-			}],
-			"Entity" : "Africa"
-		}, {
-			"Distribution" : [{
-				"GDS" : "1A",
-				"Count" : "3740"
-			}],
-			"Entity" : "SE Asia"
-		}, {
-			"Distribution" : [{
-				"GDS" : "1A",
-				"Count" : "4244"
-			}],
-			"Entity" : "Southern America"
-		}],
-		"EntityType" : "REGION"
-	}
+	url : '/packages?dest=NCE&type=F&week_start=1&week_end=4&category=overall_cheapest',
+	response: function(settings) {
+	    // Investigate the `settings` to determine the response...
+	    var f_packages = europ_packages_info.packages.filter(function(package){
+	    	return package.type==="F";
+	    });
+	    var best_packages = [1,2,3,4].map(function(week){
+	    	week_packages = f_packages.filter(function(package){
+	    		return package.Weekend_num==week;
+	    	});
+	    	week_packages = week_packages.map(function(package){
+	    		var best_flight=package.flights[0];
+	    		var best_hotel = package.hotels[0];
+	    		package.flights.forEach(function(flight){
+	    			if(flight.price< best_flight.price){
+	    				best_flight = flight;
+	    			} 
+	    		});
+	    		package.hotels.forEach(function(hotel){
+	    			if(hotel.price< best_hotel.price){
+	    				best_hotel = hotel;
+	    			} 
+	    		});
+	    		package.flight_best = best_flight;
+	    		package.hotel_best = best_hotel;
+	    		package.best_price = calculateBestPrice(package);
+	    		return package;
+	    	});
+	    	var week_best = week_packages[0];
+	    	week_packages.forEach(function(package){
+	    		if(package.best_price<week_best.best_price){
+	    			week_best = package;
+	    		}
+	    	})
+	    	return week_best;
+	    })
+	    this.responseText = best_packages;
+	  }
+	
 });
 $.mockjax({
 	url : '/chartData',

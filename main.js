@@ -12,24 +12,36 @@ google.load('visualization', '1', {
 			zoom : 2,
 		};
 
+		$.ajax({
+			url: '/packages?dest=NCE&type=F&week_start=1&week_end=4&category=overall_cheapest',
+			success:function(response){
+				response.forEach(function(place){
+					markPackage(place);
+				});
+			},
+			error:function(error){
+
+			}
+		})
+
 		drawMap(options);
 
-		markPackage({
-            "id": "pack_1",
-            "name": "2N/3D to Paris",
-            "Weekend_num": 1,
-            "year": "2016",
-            "destination_name": "Paris",
-            "destination_code": "PAR",
-            "type": "F",
-            "image": "images/par_1.jpg",
-            "flight_best": {"type":"E", "price":8000},
-            "hotel_best": {"type":"B", "price":5000},
-            "events": [{"type":"Eiffel Tower Pass", "price":2800}, {"type":"Access Louvre", "price":1400}, {"type":"Metro Pass", "price":1200}],
-            "Currency": "INR",
-            "latitude": 48.85059207,
-            "longitude": 2.40642274
-        });
+		// markPackage({
+  //           "id": "pack_1",
+  //           "name": "2N/3D to Paris",
+  //           "Weekend_num": 1,
+  //           "year": "2016",
+  //           "destination_name": "Paris",
+  //           "destination_code": "PAR",
+  //           "type": "F",
+  //           "image": "images/par_1.jpg",
+  //           "flight_best": {"type":"E", "price":8000},
+  //           "hotel_best": {"type":"B", "price":5000},
+  //           "events": [{"type":"Eiffel Tower Pass", "price":2800}, {"type":"Access Louvre", "price":1400}, {"type":"Metro Pass", "price":1200}],
+  //           "Currency": "INR",
+  //           "latitude": 48.85059207,
+  //           "longitude": 2.40642274
+  //       });
 
 		
 		// drawSlider(2013);

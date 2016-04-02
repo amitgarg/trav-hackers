@@ -363,7 +363,7 @@ var europ_packages_info = {
             "id": "pack_22",
             "name": "2N/3D to Barcelona",
             "Weekend_num": 2,
-            "year": "2016",9
+            "year": "2016",
             "destination_name": "Barcelona",
             "destination_code": "BCN",
             "type": "C",
