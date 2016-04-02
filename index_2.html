@@ -12,48 +12,188 @@
 		<link rel="stylesheet" type="text/css" href="assets/css/custom.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="assets/css/iThing.css" media="screen">
 
+		<style>
+			body {
+				position: relative;
+			}
+			#map_canvas {
+				height: 500px;
+				width: 1106px;
+				display: inline-block;
+				float: left;
+				border-style: solid;
+				border-width: 1px;
+				border-color: #E5E5E5;
+			}
+			#container {
+				height: 500px;
+				margin: 0 auto;
+				display: inline-block;
+				width: 450px;
+			}
+			#pattern-analysis-chart-container {
+				height: 100%;
+			}
+			#pattern-analysis-list {
+				/*width: 220px;*/
+				width: 220px;
+				height: 500px;
+				border-color: #E5E5E5;
+				border-image: none;
+				border-radius: 1px;
+				border-style: solid;
+				border-width: 1px;
+				z-index: 1;
+				position: fixed;
+				/*height: 400px;*/
+			}
+			#fixed-div {
+				width: 220px;
+				margin-left: 20px;
+				height: 500px;
+				float: left;
+				position: relative;
+			}
+			#pattern-analysis-list a {
+				float: left;
+				line-height: 35px;
+				cursor: move;
+				font-weight: 24px;
+				padding-left: 15px;
+				font-size: 12px;
+			}
+			#pattern-analysis-list span {
+				font-size: 15px;
+				font-family: 'verdana';
+				padding-left: 10px;
+			}
+			#pattern-analysis-list span:nth-child(2) {
+				font-weight: bold;
+			}
+			#pattern-analysis-1 {
+				width: 800px;
+				/*height: 400px;*/
+			}
+			#pattern-analysis-2 {
+				width: 800px;
+				/*height: 400px;*/
+			}
+			#dynamicDivs {
+				margin-top: 20px;
+				flot: left;
+				min-height: 400px;
+				min-width: 600px;
+			}
+			#close {
+				float: right;
+				display: inline-block;
+				padding: 2px 5px;
+				background: #ccc;
+			}
+
+			#close:hover {
+				float: right;
+				display: inline-block;
+				padding: 2px 5px;
+				background: #ccc;
+				color: #fff;
+			}
+			.newtab-row {
+				margin-bottom: 20px;
+				height: 400px;
+			}
+			.report-cell {
+				background-color: rgba(255, 255, 255, 0.2);
+				border-color: #E5E5E5;
+				border-image: none;
+				border-radius: 1px;
+				border-style: solid;
+				border-width: 1px;
+				width: 542px;
+				height: 400px;
+				float: left;
+			}
+			.cell-0 {
+				margin-right: 20px;
+			}
+			.primarybutton {
+				margin-left: 40px;
+				position: absolute;
+				bottom: 0px;
+				left: 0px;
+				margin-bottom: 10px;
+			}
+
+		</style>
+
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBvAtw_wYNKCFWJPSUlhGqUITLVjS1DNcA"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="libs/app/map-handler.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+		
+		<script type="text/javascript" src="libs/app/constants.js"></script>
+		<script type="text/javascript" src="libs/app/chart-handler.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+		<script type="text/javascript" src="libs/vendor/jQDateRangeSlider-withRuler-min.js"></script>
+		<script type="text/javascript" src="libs/vendor/json2.js"></script>
+		<script type="text/javascript" src="libs/vendor/jquery.mockjax.js"></script>
+		<script type="text/javascript" src="data/europePackages.js"></script>
+		<script type="text/javascript" src="libs/app/mock-ajax.js"></script>
+		<script type="text/javascript" src="libs/vendor/jquery.mousewheel.min.js"></script>
+		<script type="text/javascript" src="libs/vendor/moment.js"></script>
+		
+		<script id="entry-template" type="text/x-handlebars-template">
+		  	<div class="owl-item" style="width: 293px;">
+		  		<div class="list-item">
+                	<div class="list-thumb">
+                    	<div class="title">
+                        	Weekend {{Weekend_num}}:{{name}}
+	                    </div>
+	                    <img alt="destination 3" src="assets/{{image}}" height="180px" width="293px">
+	                </div> <!-- /.list-thumb -->
+	                <div class="list-content" style="margin-top:0px">
+	                    <h1>Flight: {{flightClass flight_best}}, Hotel: {{hotelClass hotel_best}}</h1>
+	                    <h1>Inclusions:</h1>
+	                    {{inclusions events}}		                    
+	                    <a class="price-btn" href="#">{{currencyDisplay this}} Interested?</a>
+	                </div> <!-- /.list-content -->
+            	</div>
+        	</div>
+		</script>
+		<script type="text/javascript" src="libs/app/info-handler.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+
+		<div class="header">
+			<span><img src="assets/images/yatra-logo.jpg" class="logo"></span>
+			<span class="logo">iNexus-Bleisure Recommendations</span>
+		</div>
+
 		<div style="height:500px;">
-			<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-			<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBvAtw_wYNKCFWJPSUlhGqUITLVjS1DNcA"></script>
-			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-			<script type="text/javascript" src="libs/app/map-handler.js"></script>
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+			<div id="map_canvas"></div>
+			<div id="fixed-div">
+				<div id="pattern-analysis-list">
+					<div class="header">
+						<span>Pattern Analysis</span>
+					</div>
+					<h1>Market:</h1>
+					<span id="marketSelected"></span>
+					<div ondragstart="onDrag(event)">
+						<a draggable="true" data-value="report-search-by-search-date"> Searches by Search date </a>
+						<a draggable="true" data-value="report-search-by-travel-date"> Searches by Travel date </a>
+						<a draggable="true" data-value="report-search-by-search-day"> Searches by Search day </a>
+						<a draggable="true" data-value="report-search-by-travel-day"> Searches by Travel day </a>
+					</div>
+					<input type="submit" value="Add Report View" class="primarybutton" onclick="addDiv()">
+				</div>
+			</div>
+		</div>
+		<!--div style="height:500px;">
 			
-			<script type="text/javascript" src="libs/app/constants.js"></script>
-			<script type="text/javascript" src="libs/app/chart-handler.js"></script>
-			<script type="text/javascript" src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-			<script type="text/javascript" src="libs/vendor/jQDateRangeSlider-withRuler-min.js"></script>
-			<script type="text/javascript" src="libs/vendor/json2.js"></script>
-			<script type="text/javascript" src="libs/vendor/jquery.mockjax.js"></script>
-			<script type="text/javascript" src="data/europePackages.js"></script>
-			<script type="text/javascript" src="libs/app/mock-ajax.js"></script>
-			<script type="text/javascript" src="libs/vendor/jquery.mousewheel.min.js"></script>
-			<script type="text/javascript" src="libs/vendor/moment.js"></script>
-			
-			<script id="entry-template" type="text/x-handlebars-template">
-			  	<div class="owl-item" style="width: 293px;">
-			  		<div class="list-item">
-	                	<div class="list-thumb">
-	                    	<div class="title">
-	                        	Weekend {{Weekend_num}}:{{name}}
-		                    </div>
-		                    <img alt="destination 3" src="assets/{{image}}" height="180px" width="293px">
-		                </div> <!-- /.list-thumb -->
-		                <div class="list-content" style="margin-top:0px">
-		                    <h1>Flight: {{flightClass flight_best}}, Hotel: {{hotelClass hotel_best}}</h1>
-		                    <h1>Inclusions:</h1>
-		                    {{inclusions events}}		                    
-		                    <a class="price-btn" href="#">{{currencyDisplay this}} Interested?</a>
-		                </div> <!-- /.list-content -->
-	            	</div>
-	        	</div>
-			</script>
-			<script type="text/javascript" src="libs/app/info-handler.js"></script>
-			<script type="text/javascript" src="main.js"></script>
 			
 			<div id="map_canvas"></div>
-			<!-- <div id="container"></div> -->
-		</div>
+			<! <div id="container"></div> >
+		</div-->
 		
 		
 	</body>
