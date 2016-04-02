@@ -16,6 +16,7 @@
 <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/bookingDetails.js"></script>
 
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/html5.js"></script>
@@ -29,7 +30,7 @@
 	</div>
 <![endif]-->
 </head>
-<body id="page2">
+<body id="page2" onload="getBookingDetails()">
 <div class="main">
 <!--header -->
 	<header>
@@ -62,7 +63,136 @@
 <!-- / header -->
 <!--content -->
 	<section id="content">
-		
+	<div class="wrapper" style="width:100%">
+		<div style="float:left; width:70%">
+		<table style="width:100%">
+			<tr style='background-color:black; height:45px; font-size:22px; width:100%'>
+				<th style="color:white; vertical-align:middle;">Passenger Details</th>
+				<th></th>
+				<th></th>
+			</tr>
+			
+			<tr style='background-color:#E6E6FA; height:30px; font-size:16px;'>
+				<td>Title <input type='radio' name='title'/><bold>Mr</bold> <input type='radio' name='title'/><bold>Mrs</bold></td>
+				<td></td>
+				<td></td>
+			</tr>
+
+			<tr style='background-color:#E6E6FA; height:30px; font-size:16px;'>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td></td>
+			</tr>
+
+			<tr style='background-color:#E6E6FA; height:40px;'>
+				<td><input type='text' style='background-color:#E6E6FA; border:1px solid white; height:30px; font-size:16px;' name='First Name' value='GURJYOT'></input></td>
+				<td><input type='text' style='background-color:#E6E6FA; border:1px solid white; height:30px; font-size:16px;' name='Last Name' value='SINGH'></input></td>
+				<td></td>
+			</tr>
+
+			<tr style='background-color:#E6E6FA; height:30px; font-size:16px;'>
+				<td>Nationality</td>
+				<td>D.O.B.</td>
+				<td>User Id</td>
+			</tr>
+
+			<tr style='background-color:#E6E6FA; height:40px;'>
+				<td><input type='text' style='background-color:#E6E6FA; border:1px solid white; height:30px; font-size:16px;' name='Nationalilty' value='INDIAN'></input></td>
+				<td>
+				<input type='text' style='background-color:#E6E6FA; border:1px solid white; height:30px; font-size:16px;' value='6 March 1992'/>
+				</td>
+				<td><input type='text' style='background-color:#E6E6FA; border:1px solid white; height:30px; font-size:16px;' name='userId' value='5682299986'></input></td>
+			</tr>
+		</table>
+		</div>
+		<div style="float:right; width:28%; background-color:#E6E6FA;">
+		<table style="width:100%">
+			<tr>
+				<th style='font-size:18px'>BOOKING SUMMARY</th>
+			</tr>
+		</table>
+		<table style="width:100%">
+			<tr>
+				<td style='font-size:16px;'><d id='origin'></d>to<d id='destination'></d></td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<table style="width:100%">
+			<tr>
+				<th style='font-size:18px'>DEPART</th>
+			</tr>
+			<tr>
+				<td style='font-size:14px'><d id='depFlightNum'></d></td>
+			</tr>
+		</table>
+		<table style="width:100%">	
+			<tr>
+				<td style='font-size:16px; text-align:center'><d id='originCode'></d></td>
+				<td style='font-size:16px; text-align:left'><d id='destinationCode'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:12px; text-align:center;'><d id='depDepartDate'></d>, <d id='depDepartTime'></d></td>
+				<td style='font-size:12px; text-align:left'><d id='depArrivaldate'></d>, <d id='depArrivalTime'></d></td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<table style="width:100%">
+			<tr>
+				<th style='font-size:18px'>ARRIVAL</th>
+			</tr>
+			<tr>
+				<td style='font-size:14px'><d id='arrFlightNum'></d></td>
+			</tr>
+		</table>
+		<table style="width:100%">	
+			<tr>
+				<td style='font-size:16px; text-align:center'><d id='destinationCodee'></d></td>
+				<td style='font-size:16px; text-align:left'><d id='originCodee'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:12px; text-align:center;'><d id='arrDepartDate'></d>, <d id='arrDepartTime'></d></td>
+				<td style='font-size:12px; text-align:left'><d id='arrArrivaldate'></d>, <d id='arrsArrivalTime'></d></td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<table style="width:100%">	
+			<tr>
+				<th style='font-size:16px; text-align:left;'>Fares, Taxes and Fees</th>
+			</tr>
+			<tr>
+				<td style='font-size:14px; text-align:left;'>Fares</td>
+				<td style='font-size:14px; text-align:left'><d id='fares'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:14px; text-align:left;'>Airport Fee</td>
+				<td style='font-size:14px; text-align:left'><d id='airportFee'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:14px; text-align:left;'>passengerServiceFee</td>
+				<td style='font-size:14px; text-align:left'><d id='passengerServiceFee'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:14px; text-align:left;'>User Development Fee</td>
+				<td style='font-size:14px; text-align:left'><d id='userDevelopmentFee'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:14px; text-align:left;'>Swatch Bharath Cess</td>
+				<td style='font-size:14px; text-align:left'><d id='swatchBharathCess'></d></td>
+			</tr>
+			<tr>
+				<td style='font-size:14px; text-align:left;'>Indian Service Tax</td>
+				<td style='font-size:14px; text-align:left'><d id='indianServiceTax'></d></td>
+			</tr>
+			<tr>
+				<th style='font-size:16px; text-align:left;'>TOTAL (<d id='currency'></d>):</th>
+				<th style='font-size:16px; text-align:left'><d id='totalPrice'></d></th>
+			</tr>
+		</table>
+		</div>
+	<div>
 	</section>
 			<!--content end-->
 			<!--footer -->

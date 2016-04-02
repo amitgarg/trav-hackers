@@ -27,18 +27,22 @@ function displayFlightDetails(){
 	var content = "";
 
 	content += "<div style='height:50px; font-size:25px;'> Outbound " + details_json["origin"] + " to " + details_json["destination"] + " (" + details_json["departureDate"]  + ") </div>";
-	content += createTable(originCode, destinationCode, details_json["outboundFlights"]);
+	content += createTable(originCode, destinationCode, details_json["outboundFlights"], "out");
 	content += "<br>";
 	content += "<br>";
 	content += "<br>";
 	content += "<div style='height:50px; font-size:25px;'> Inbound " + details_json["destination"] + " to " + details_json["origin"] + " (" + details_json["departureDate"]  + ") </div>";
-	content += createTable(destinationCode, originCode, details_json["inboundFlights"]);
+	content += createTable(destinationCode, originCode, details_json["inboundFlights"], "in");
 	
-	
+	content += "<br>";
+	content += "<div class='wrapper'>";
+	content += "<span style='height:50px; margin-right:100px' class=\"right relative\"><a style='height:40px;' href=\"Confirm.html\" class=\"button1\"><strong style='text-align:middle; font-size:25px'>Book Now</strong></a></span>";
+	content += "</div>";
+												
 	content_div.innerHTML = content;
 }
 
-function createTable(originCode, destinationCode, flightDetailsList){
+function createTable(originCode, destinationCode, flightDetailsList, inOrOut){
 	var content = "<table style='width:100%;'>";
 	
 	content += "	<tr style='height:40px; font-size:20px;'>";
@@ -56,7 +60,7 @@ function createTable(originCode, destinationCode, flightDetailsList){
 		content += "		<th class='col-sm-2' style='text-align:left; vertical-align:middle'>" + String(flightDetails["arrivalTime"]) + "</th>";
 		content += "		<th class='col-sm-2' style='text-align:left; vertical-align:middle'>" + flightDetails["duration"] + "</th>";
 		content += "		<th style='text-align:right; vertical-align:middle'>" + flightDetails["price"] + " (" + flightDetails["flightCode"] + ")</th>";
-		content += "		<th class='col-sm-3' style='margin-left:25px; vertical-align:middle'><input type='radio'/></th>";
+		content += "		<th class='col-sm-3' style='margin-left:25px; vertical-align:middle'><input type='radio' name='" + inOrOut + "'/></th>";
 		content += "	</tr>";
 	}
 	content += "</table>";
