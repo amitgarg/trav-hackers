@@ -1,4 +1,5 @@
 var users_map = {};
+var itinerary_map = {};
 $.mockjax({
 	url : '/session',
 	type: 'POST',
@@ -16,16 +17,38 @@ $.mockjax({
 	  }
 	
 });
+
+$.mockjax({
+	url : /^\/itinerary\/([\w]+)$/,
+	urlParams : ["session_id"],
+	type: 'POST',
+	response: function(settings) {
+	    var data = settings.data;
+	    if(!itinerary_map[settings.urlParams.session_id]){
+	    	itinerary_map[settings.urlParams.session_id] = settings.data;
+	    }
+	    console.log(itinerary_map);
+	    this.responseText = {'status' : 'success'};
+	  }
+	
+});
+
 $.mockjax({
 	// url : '/packages?dest=NCE&type=F&week_start=1&week_end=4&category=overall_cheapest',
-	url : '/packages\?dest=NCE&week_start=1&week_end=4&category=overall_cheapest&session_id=1A_700798',
+	url : '/packages?category=overall_cheapest&session_id=1A_700798',
 	response: function(settings) {
 	    // Investigate the `settings` to determine the response...
 	    var user = users_map["1A_700798"];
+	    var itinerary = itinerary_map["1A_700798"].itinerary;
 	    var f_packages = europ_packages_info.packages.filter(function(package){
 	    	return package.type===user.emp_type;
 	    });
-	    var best_packages = [1,2,3,4].map(function(week){
+	    var weeks_array = [];
+	    var counter = itinerary.week_start;
+	    while(counter<=itinerary.week_end){
+	    	weeks_array.push(counter++);
+	    }
+	    var best_packages = weeks_array.map(function(week){
 	    	week_packages = f_packages.filter(function(package){
 	    		return package.Weekend_num==week;
 	    	});

@@ -28,10 +28,6 @@ function markPackage(package,center,status){
     infowindow.open(map, marker);
     status.current_info = infowindow;
   });
-  // marker.addListener('mouseout', function() {
-  //   infowindow.close(map, marker);
-  //   map.setCenter(center);
-  // });
   google.maps.event.addListener(infowindow, 'closeclick', function(){
     map.setCenter(center);   
     status.current_info = null; 

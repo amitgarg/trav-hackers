@@ -31,13 +31,22 @@ google.load('visualization', '1', {
 				session_id = response.session_id;
 				console.log(session_id);
 				$.ajax({
-					url: '/packages?dest=NCE&week_start=1&week_end=4&category=overall_cheapest&session_id='+session_id,
-					success:function(response){
-							markPackages(response,center);
-					},
-					error:function(error){
+					url : '/itinerary/'+session_id,
+					type : 'POST',
+					data: {itinerary: {week_start: 1, week_end: 4, dest: "NCE"}},
+					success:function(){
+						$.ajax({
+							url: '/packages?category=overall_cheapest&session_id='+session_id,
+							success:function(response){
+								console.log(response);
+									markPackages(response,center);
+							},
+							error:function(error){
 
+							}
+						});
 					}
+				
 				});
 			},
 			error:function(error){
