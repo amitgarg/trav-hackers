@@ -10,7 +10,7 @@ google.load('visualization', '1', {
 			container : $('#map_canvas'),
 			centerLattitude : 43.66532403,
 			centerLongitude : 7.219268219,
-			zoom : 4,
+			zoom : 3,
 		};
 
 		drawMap(options);
@@ -54,30 +54,6 @@ google.load('visualization', '1', {
 			}
 		});
 
-
-		
-
-		
-
-		// markPackage({
-  //           "id": "pack_1",
-  //           "name": "2N/3D to Paris",
-  //           "Weekend_num": 1,
-  //           "year": "2016",
-  //           "destination_name": "Paris",
-  //           "destination_code": "PAR",
-  //           "type": "F",
-  //           "image": "images/par_1.jpg",
-  //           "flight_best": {"type":"E", "price":8000},
-  //           "hotel_best": {"type":"B", "price":5000},
-  //           "events": [{"type":"Eiffel Tower Pass", "price":2800}, {"type":"Access Louvre", "price":1400}, {"type":"Metro Pass", "price":1200}],
-  //           "Currency": "INR",
-  //           "latitude": 48.85059207,
-  //           "longitude": 2.40642274
-  //       });
-
-		
-		// drawSlider(2013);
 		
 		(function($) {
 			$.fn.drags = function(opt) {

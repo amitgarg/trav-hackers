@@ -216,3 +216,7 @@ a:active, a:focus {
     text-align: center;
     text-transform: uppercase;
 }
+
+.list-content h1{
+  padding : 0;
+}

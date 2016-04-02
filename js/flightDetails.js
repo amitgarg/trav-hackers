@@ -31,7 +31,7 @@ function displayFlightDetails(){
 	content += "<br>";
 	content += "<br>";
 	content += "<br>";
-	content += "<div style='height:50px; font-size:25px;'> Inbound " + details_json["destination"] + " to " + details_json["origin"] + " (" + details_json["departureDate"]  + ") </div>";
+	content += "<div style='height:50px; font-size:25px;'> Inbound " + details_json["destination"] + " to " + details_json["origin"] + " (" + details_json["ReturnDate"]  + ") </div>";
 	content += createTable(destinationCode, originCode, details_json["inboundFlights"], "in");
 	
 	content += "<br>";
